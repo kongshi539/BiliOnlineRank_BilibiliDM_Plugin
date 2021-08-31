@@ -1,0 +1,13 @@
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\bin\Debug\BiliOnlineRank.pdb
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.csproj.CoreCompileInputs.cache
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.pdb
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.Form1.resources
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.Form2.resources
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.Form3.resources
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.csproj.GenerateResource.cache
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\bin\Debug\BiliOnlineRank.dll.config
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\bin\Debug\BiliOnlineRank.dll
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\bin\Debug\BilibiliDM_PluginFramework.dll
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\bin\Debug\Newtonsoft.Json.dll
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.csproj.CopyComplete
+C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank\obj\Debug\BiliOnlineRank.dll
