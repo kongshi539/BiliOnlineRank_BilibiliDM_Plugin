@@ -24,4 +24,3 @@ C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank_BilibiliDM_Plugin\o
 C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank_BilibiliDM_Plugin\obj\Debug\BiliOnlineRank_BilibiliDM_Plugin.csproj.CopyComplete
 C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank_BilibiliDM_Plugin\obj\Debug\BiliOnlineRank_BilibiliDM_Plugin.dll
 C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank_BilibiliDM_Plugin\obj\Debug\BiliOnlineRank_BilibiliDM_Plugin.pdb
-C:\Users\业玖\Downloads\BiliOnlineRank-main\BiliOnlineRank_BilibiliDM_Plugin\obj\Debug\BiliOnlineRank_BilibiliDM_Plugin.csproj.AssemblyReference.cache

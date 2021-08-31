@@ -104,37 +104,113 @@ public static class BliveOnline
     /// <returns>password</returns>
     ///  
     public static Form1 FormLogin;
-    public static Form1 FormCaptcha;
+    public static Form2 FormCaptcha;
     public static Thread captchThread;
     public static LoginInfo loginInfo;
     public static string username;
      public static string password;
     public static string prefix;
     public static Thread t1;
+    
     public static Boolean IsRun = true;
     public static void captchInput(object sender, Userinfo uinfo)
     {
-        try { 
-  
-        captchThread.Abort();
-        string captchtxt = uinfo.captchtxt;
-        loginInfo = BiliLogin.Login(username, password, captchtxt);
-        Console.WriteLine(loginInfo);
-        Console.WriteLine(); }
+        try {
+            FormCaptcha.Close();
+            string captchtxt = uinfo.captchtxt;
+            loginInfo = BiliLogin.Login(username, password, captchtxt);
+            Console.WriteLine(loginInfo);
+            Console.WriteLine();
+            string defaultPrefix = "http://localhost:6689/";
+            void startsvc()
+            {
+                // Refresh token
+                // TODO: store and re-use the token 
+                Console.WriteLine("-------- 更新令牌 --------");
+                LoginToken newLoginToken = BiliLogin.RefreshToken(loginInfo.Token);
+                Console.WriteLine(newLoginToken);
+                Console.WriteLine();
+
+                // Room Info
+                Console.WriteLine("-------- 房间信息 --------");
+                RoomInfo roomInfo = BiliLive.GetInfo(loginInfo.Token.AccessToken, loginInfo.Token.Mid.ToString());
+                Console.WriteLine($"房间号: {roomInfo.RoomId}");
+                Console.WriteLine($"用户ID: {roomInfo.Uid}");
+                Console.WriteLine($"用户名: {roomInfo.Uname}");
+                Console.WriteLine($"标题: {roomInfo.Title}");
+                Console.WriteLine($"分区名称: {roomInfo.ParentName} - {roomInfo.AreaV2Name}");
+                Console.WriteLine($"粉丝牌名称: {roomInfo.MedalName}");
+                Console.WriteLine();
+
+                // Service
+                Console.WriteLine("-------- 本地服务 --------");
+                ApiProvider apiProvider = new ApiProvider(defaultPrefix);
+                apiProvider.Start();
+                Console.WriteLine($"服务运行在: {defaultPrefix}");
+                Console.WriteLine($"  /data: 获取数据");
+
+                // Ranking list
+                Console.WriteLine("-------- 排行榜 --------");
+                Console.WriteLine();
+                while (true)
+                {
+                    if (IsRun)
+                    {
+                        Console.WriteLine("排名\t贡献值\t用户名");
+                        Console.WriteLine("-------- 高能榜 --------");
+                        AnchorOnlineGoldRank onlineGoldRank = BiliLive.GetAnchorOnlineGoldRank(loginInfo.Token.AccessToken, "1", "50", roomInfo.RoomId.ToString(), loginInfo.Token.Mid.ToString());
+                        apiProvider.GoldRank = onlineGoldRank;
+                        foreach (AnchorOnlineGoldRankItem item in onlineGoldRank.Items)
+                        {
+                            Console.WriteLine($"{item.UserRank}\t{item.Score}\t{item.Name}");
+                        }
+
+                        Console.WriteLine("-------- 在线用户 --------");
+                        OnlineRank onlineRank = BiliLive.GetOnlineRank(loginInfo.Token.AccessToken, "1", "50", roomInfo.RoomId.ToString(), loginInfo.Token.Mid.ToString());
+                        apiProvider.Rank = onlineRank;
+                        foreach (OnlineRankItem item in onlineRank.Items)
+                        {
+                            Console.WriteLine($"-\t0\t{item.Name}");
+                        }
+                        Console.WriteLine($"在线人数: {onlineRank.OnlineNum}");
+                        Console.WriteLine();
+
+                        // Sleep for 20s
+                        //将间隔时间改为了10s 2021/8/28 YEJIU
+                        for (int i = 10; i > 0; i--)
+                        {
+                            Console.Write($"\r{i} ");
+                            Thread.Sleep(1000);
+                        }
+                        Console.WriteLine($"\r  ");
+
+                    }
+                    else break;
+                }
+                apiProvider.Stop();
+
+            }
+            t1 = new Thread(new ThreadStart(startsvc));
+            t1.Start();
+        }
          catch (LoginFailedException ex)
         {
-            File.Delete("onlineconfig.txt");
+            if (File.Exists("onlineconfig.txt"))
+                File.Delete("onlineconfig.txt");
             Form3 formError= new Form3();
             formError.Show();
             Console.WriteLine(ex);
+            
         }
         catch (LoginStatusException ex)
         {
-            File.Delete("onlineconfig.txt");
+            if (File.Exists("onlineconfig.txt"))
+                File.Delete("onlineconfig.txt");
             Form3 formError = new Form3();
             formError.Show();
             Console.WriteLine(ex);
             Console.WriteLine(ex);
+            
         }
     }
     public static void loginconfig(object sender, Userinfo uinfo)
@@ -283,7 +359,7 @@ public static class BliveOnline
 
                 captchThread = ShowImage(captchaImage);
                 Console.Write("请输入验证码: ");
-                Form2 FormCaptcha = new Form2();
+                FormCaptcha = new Form2();
                 FormCaptcha.Show();
          
             }
@@ -372,14 +448,14 @@ public static class BliveOnline
 
         }
         
-        {
-            if (IsRun) { 
+        
+            if (IsRun&& loginInfo!=null) { 
              t1 = new Thread(new ThreadStart(startsvc));
 
             t1.Start();
             }
 
-        }
+        
     }
 }
 
