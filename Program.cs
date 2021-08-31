@@ -283,8 +283,8 @@ public static class BliveOnline
 
                 captchThread = ShowImage(captchaImage);
                 Console.Write("请输入验证码: ");
-                FormLogin = new Form1();
-                FormLogin.Show();
+                Form2 FormCaptcha = new Form2();
+                FormCaptcha.Show();
          
             }
             catch (LoginFailedException ex)

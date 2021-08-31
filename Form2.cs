@@ -28,6 +28,7 @@ namespace BiliOnlineRank
         {
             sendcaptchinfo += new EventHandler<Userinfo>(BliveOnline.captchInput);
             sendcaptchinfo(this, new Userinfo(textBox1.Text));
+            Close();
             
         }
 
